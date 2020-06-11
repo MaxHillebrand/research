@@ -1,6 +1,6 @@
 # Externally funded succinct atomic swaps
 
-Based on @RubenSomsen [succinct atomic swaps](https://gist.github.com/RubenSomsen/8853a66a64825716f51b409be528355f).
+Based on Ruben Somsen [succinct atomic swaps](https://gist.github.com/RubenSomsen/8853a66a64825716f51b409be528355f).
 
 ## Design goal
 
@@ -16,6 +16,11 @@ The client swaps his non-private coins, for high anonymity set coinjoined coins 
 Whenever the client receives bitcoin from a different user [funder], this transaction directly funds a swap address.
 The funder does not need to speak the swap protocol, there is no need for pre-signing refund transactions, the funder simply pays a single-pubkey address.
 As soon as the funder's transaction confirms, the client can withdraw coins from the swap payment channel.
+
+SAS is used as the basice protocol, because we require that the funding transaction does not need to be negotiated in a multi-round communication process.
+The fallback transaction negotiation must be constrained to only one side of the swap.
+Only the client and the server can be expected to communicate, not the funder, who only pays the client.
+
 This protocol deviates from the initial SAS proposal, because at the time the client - server setup the swap, they do not know how much bitcoin the funder will send to the client.
 This problem is solved by the use of a payment channel on one side of the swap.
 
