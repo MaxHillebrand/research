@@ -24,6 +24,10 @@ Only the client and the server can be expected to communicate, not the funder, w
 This protocol deviates from the initial SAS proposal, because at the time the client - server setup the swap, they do not know how much bitcoin the funder will send to the client.
 This problem is solved by the use of a payment channel on one side of the swap.
 
+In order to minimize the on-chain fingerprint of the swap, no multisignature + timelocked scripts, or sighash_anyprevout or op_CTV is used.
+Rather, we utilize 2p-ECDSA and ECDSA adaptor signatures, which will make the swap indistinguishable from a regular single public key spend.
+This can be achieved more elegantly by utilizing taproot, and it is strongly recommended to use it, as soon as it becomes available on Bitcoin.
+
 ## Protocol
 
 ### Participants
